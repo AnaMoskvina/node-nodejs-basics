@@ -7,9 +7,8 @@ import fs from 'fs'
 import fsPromises from 'fs/promises'
 import path from 'path'
 
-const dirPath = path.resolve()
-const originalDirPath = `${dirPath}/files`
-const copyDirPath = `${dirPath}/files_copy`
+const originalDirPath = path.resolve('files')
+const copyDirPath = path.resolve('files_copy')
 const errorMessage = 'FS operation failed'
 
 // 1. async
@@ -22,8 +21,8 @@ export const copy = () => {
                     fs.readdir(originalDirPath, 'utf8', (_err, files) => {
                         files.forEach(file => {
                             fs.copyFile(
-                                `${originalDirPath}/${file}`, 
-                                `${copyDirPath}/${file}`, 
+                                path.resolve(originalDirPath, file), 
+                                path.resolve(copyDirPath, file), 
                                 0, 
                                 () => {})
                         })

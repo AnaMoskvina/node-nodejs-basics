@@ -7,12 +7,9 @@ import fs from 'fs'
 import fsPromises from 'fs/promises'
 import path from 'path'
 
-const dirPath = path.resolve('files')
-
-const wrongFilename = `${dirPath}/wrongFilename.txt`
-const properFilename = `${dirPath}/properFilename.md`
+const wrongFilename = path.resolve('files', 'wrongFilename.txt')
+const properFilename = path.resolve('files', 'properFilename.md')
 const errorMessage = 'FS operation failed'
-
 
 // 1. async
 // export const rename = () => {
@@ -27,13 +24,13 @@ const errorMessage = 'FS operation failed'
 // rename()
 
 // 2. promises
-// export const rename1 = async () => {
-//     try {
-//         await fsPromises.access(wrongFilename, fs.constants.F_OK)
-//         fsPromises.rename(wrongFilename, properFilename)
-//     } catch (err) {
-//         throw new Error(errorMessage)
-//     }
-// }
+export const rename1 = async () => {
+    try {
+        await fsPromises.access(wrongFilename, fs.constants.F_OK)
+        fsPromises.rename(wrongFilename, properFilename)
+    } catch (err) {
+        throw new Error(errorMessage)
+    }
+}
 
-// rename1()
+rename1()
