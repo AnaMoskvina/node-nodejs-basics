@@ -1,40 +1,51 @@
+// implement function that creates new file fresh.txt 
+// with content I am fresh and young  inside of the files folder 
+// (if file already exists Error with message FS operation failed must be thrown)
+
 import fs from 'fs'
 import fsPromises from 'fs/promises'
 import path from 'path'
 
 const filePath = path.resolve('files', 'fresh.txt')
 const text = 'I am fresh and young'
+const errorMessage = 'FS operation failed'
 
 
 // 1. async
-// export const create = async () => {
-//     // Write your code here     
-//     try {
-//         fs.access(filePath, fs.constants.F_OK, err => {
-//           if (!err) throw new Error('FS operation failed')
-//           fs.writeFile(filePath, text, 'utf8', () => { 
+// export const create = async () => {   
+//     fs.access(filePath, fs.constants.F_OK, err => {
+//         if (!err) throw new Error(errorMessage)
+//         fs.writeFile(filePath, text, 'utf8', () => { 
 //             console.log('created')
-//           })
 //         })
-//     } catch(e) {
-//         console.log(e)
-//     }
+//     })
 // }
 
 // create()
 
 
 // 2. promises
-export const create1 = async () => {    
+// export const create1 = async () => {    
+//     try {
+//         await fsPromises.access(filePath, fs.constants.F_OK)
+//         .then(() => {
+//             throw new Error(errorMessage)
+//             },
+//             () => fsPromises.writeFile(filePath, text, 'utf8'))
+//     } catch(e) {
+//         console.log(e)
+//     }
+// }
+
+// create1()
+
+// 3. better way with flag
+export const create2 = async () => {
     try {
-        await fsPromises.access(filePath, fs.constants.F_OK)
-        .then(() => {
-            throw new Error('FS operation failed')
-            },
-            () => fsPromises.writeFile(filePath, text, 'utf8'))
+        await fsPromises.writeFile(filePath, text, {encoding: 'utf8', flag: 'wx'})
     } catch(e) {
-        console.log(e)
+        throw new Error(errorMessage)
     }
 }
 
-create1()
+create2()
