@@ -13,7 +13,7 @@ const copyDirPath = `${dirPath}/files_copy`
 const errorMessage = 'FS operation failed'
 
 // 1. async
-export const copy = async () => {
+export const copy = () => {
     fs.access(originalDirPath, fs.constants.F_OK, err => {
         if (err) throw new Error(errorMessage)
         fs.access(copyDirPath, fs.constants.F_OK, err => {

@@ -12,7 +12,7 @@ const errorMessage = 'FS operation failed'
 
 
 // 1. async
-// export const create = async () => {   
+// export const create = () => {   
 //     fs.access(filePath, fs.constants.F_OK, err => {
 //         if (!err) throw new Error(errorMessage)
 //         fs.writeFile(filePath, text, 'utf8', () => { 
