@@ -1,18 +1,27 @@
-// implement function that writes process.stdin data into file
+// implement function that writes process.stdin data into file using Writable Stream
 
-import { open } from 'fs/promises'
-import fs from 'fs'
+import { open } from 'fs/promises';
+import fs from 'fs';
 
-const inputFilePath = './files/fileToRead.txt'
-const outputFilePath = './files/fileToWrite.txt'
+const inputFilePath = './files/fileToRead.txt';
+const outputFilePath = './files/fileToWrite.txt';
 
-export const read = async () => {
+// const write = async () => {
+//     try {
+//         const fd = await open(inputFilePath);
+//         fd.createReadStream().pipe(fs.createWriteStream(outputFilePath));
+//     } catch(err) {
+//         console.log(err);
+//     }
+// };
+
+const write = async () => {
     try {
-        const fd = await open(inputFilePath)
-        fd.createReadStream().pipe(fs.createWriteStream(outputFilePath))
+        const fd = await open(inputFilePath);
+        fd.createReadStream().pipe(fs.createWriteStream(outputFilePath));
     } catch(err) {
-        console.log(err)
+        console.log(err);
     }
-}
+};
 
-read()
+await write();

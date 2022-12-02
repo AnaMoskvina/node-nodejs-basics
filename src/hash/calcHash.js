@@ -1,33 +1,31 @@
 // implement function that calculates SHA256 hash 
 // for file fileToCalculateHashFor.txt and return it as hex
 
-import fs from 'fs'
-import { stdout } from 'process'
+import fs from 'fs';
+import { stdout } from 'process';
 const {
     createHash
-  } = await import('node:crypto')
+  } = await import('node:crypto');
 
-const filePath = './files/fileToCalculateHashFor.txt'
+const filePath = './files/fileToCalculateHashFor.txt';
 
 // 1. with streams
-export const calculateHash = () => {
-  const hash = createHash('sha256')
+const calculateHash = async () => {
+  const hash = createHash('sha256');
   fs.createReadStream(filePath)
     .pipe(hash)
     .setEncoding('hex')
-    .pipe(stdout)
-}
-
-calculateHash()
+    .pipe(stdout);
+};
 
 // 2. with update and digest methods
-// export const calculateHash1 = () => {
-//     const hash = createHash('sha256')
+// export const calculateHash = async () => {
+//     const hash = createHash('sha256');
 //     fs.readFile(filePath, (err, data) => {
-//       if (err) throw err
-//       hash.update(data)
-//       return hash.digest('hex')
-//     })   
-// }
+//       if (err) throw err;
+//       hash.update(data);
+//       console.log(hash.digest('hex'));
+//     });
+// };
 
-// calculateHash1()
+await calculateHash();

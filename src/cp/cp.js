@@ -4,13 +4,13 @@
 // between stdin and stdout of master process and child process:
 //   -  child process stdin should receive input from master process stdin
 //   -  child process stdout should send data to master process stdout
-import { fork } from 'node:child_process'
+import {spawn} from 'node:child_process';
 
-export const spawnChildProcess = async (args) => {
-    const child = fork('./files/script', args);
+const spawnChildProcess = async (args) => {
+    const child = spawn('./files/script', args, { cwd: __dirname });
     child.on('close', (code) => {
         console.log(`child process exited with code ${code}`);
     });
 };
 
-spawnChildProcess([0, 1])
+spawnChildProcess();

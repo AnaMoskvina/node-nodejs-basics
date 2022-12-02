@@ -2,38 +2,38 @@
 // back to the fileToCompress.txt with same content 
 // as before compression using zlib and Streams API
 
-import { createUnzip } from 'zlib'
-import { pipeline } from 'stream'
-import { createReadStream, createWriteStream } from 'fs'
-import { promisify } from 'util'
+import { createUnzip } from 'zlib';
+import { pipeline } from 'stream';
+import { createReadStream, createWriteStream } from 'fs';
+import { promisify } from 'util';
 
-const pathToArchive = './files/archive.gz'
-const pathToDestination = './files/fileToCompress.txt'
+const pathToArchive = './files/archive.gz';
+const pathToDestination = './files/fileToCompress.txt';
 
 // 1. async
-// export const decompress = () => {
-//     const unzip = createUnzip()
-//     const source = createReadStream(pathToArchive)
-//     const destination = createWriteStream(pathToDestination)
+// const decompress = () => {
+//     const unzip = createUnzip();
+//     const source = createReadStream(pathToArchive);
+//     const destination = createWriteStream(pathToDestination);
 
 //     pipeline(source, unzip, destination, err => {
-//         if (err) process.exitCode = 1
+//         if (err) process.exitCode = 1;
 //     })
 // }
 
 // decompress()
 
 // 2. promises
-export const decompress1 = async () => {
+const decompress = async () => {
     try {
-        const unzip = createUnzip()
-        const pipe = promisify(pipeline)
-        const source = createReadStream(pathToArchive)
-        const destination = createWriteStream(pathToDestination)
-        await pipe(source, unzip, destination)
+        const unzip = createUnzip();
+        const pipe = promisify(pipeline);
+        const source = createReadStream(pathToArchive);
+        const destination = createWriteStream(pathToDestination);
+        await pipe(source, unzip, destination);
     } catch(err) {
-        process.exitCode = 1
+        process.exitCode = 1;
     }
 }
 
-decompress1()
+decompress();

@@ -2,18 +2,30 @@
 // content using Readable Stream and prints it's content 
 // into process.stdout
 
-import { open } from 'fs/promises'
-import { stdout } from 'process'
+import fs from 'fs';
+import { open } from 'fs/promises';
+import { stdout } from 'process';
+import path from 'path';
 
-const filePath = './files/fileToRead.txt'
+const filePath = './files/fileToRead.txt';
 
-export const read = async () => {
+// 1. with filehandle
+const read = async () => {
     try {
-        const fd = await open(filePath)
-        fd.createReadStream().pipe(stdout)
+        const fd = await open(filePath);
+        fd.createReadStream().pipe(stdout);
     } catch(err) {
-        console.log(err)
+        console.log(err);
     }
-}
+};
 
-read()
+// 2.
+// const read = async () => {
+//     try {
+//         fs.createReadStream(filePath).pipe(stdout);
+//     } catch(err) {
+//         console.log(err);
+//     }
+// };
+
+await read();
