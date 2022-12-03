@@ -2,9 +2,14 @@
 
 import { open } from 'fs/promises';
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const inputFilePath = './files/fileToRead.txt';
-const outputFilePath = './files/fileToWrite.txt';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const inputFilePath = path.resolve(__dirname,'files', 'fileToRead.txt');
+const outputFilePath = path.resolve(__dirname,'files', 'fileToWrite.txt');
 
 // const write = async () => {
 //     try {

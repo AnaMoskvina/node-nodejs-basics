@@ -6,8 +6,11 @@ import fs from 'fs';
 import { open } from 'fs/promises';
 import { stdout } from 'process';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const filePath = './files/fileToRead.txt';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.resolve(__dirname, 'files', 'fileToRead.txt');
 
 // 1. with filehandle
 const read = async () => {

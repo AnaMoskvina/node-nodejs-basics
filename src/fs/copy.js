@@ -6,9 +6,13 @@
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const originalDirPath = path.resolve('files');
-const copyDirPath = path.resolve('files_copy');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const originalDirPath = path.resolve(__dirname, 'files');
+const copyDirPath = path.resolve(__dirname, 'files_copy');
 const errorMessage = 'FS operation failed';
 
 // 1. async
@@ -45,7 +49,7 @@ const copy = async () => {
 };
 
 // 3. experimental cp (with promises)
-// doesn't work properly: copies, but handling errors doesn't work
+// doesn't work properly: copies, but handling errors doesn't work - ?
 // const copy = async () => {
 //     try {
 //         fsPromises.cp(originalDirPath, copyDirPath, { recursive: true, errorOnExist: true });

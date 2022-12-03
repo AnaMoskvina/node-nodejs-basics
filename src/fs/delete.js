@@ -5,8 +5,12 @@
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const filePath = path.resolve('files', 'fileToRemove.txt');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const filePath = path.resolve(__dirname,'files', 'fileToRemove.txt');
 const errorMessage = 'FS operation failed';
 
 // 1. async

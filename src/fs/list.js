@@ -4,9 +4,13 @@
 import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const errorMessage = 'FS operation failed';
-const dirPath = path.resolve('files');
+const dirPath = path.resolve(__dirname, 'files');
 
 // 1. async
 // const list = async () => {
@@ -23,6 +27,6 @@ const list = async () => {
     } catch (_err) {
         throw new Error(errorMessage);
     }
-}
+};
 
 await list();

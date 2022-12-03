@@ -5,10 +5,14 @@
 import { createUnzip } from 'zlib';
 import { pipeline } from 'stream';
 import { createReadStream, createWriteStream } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { promisify } from 'util';
 
-const pathToArchive = './files/archive.gz';
-const pathToDestination = './files/fileToCompress.txt';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const pathToArchive = path.resolve(__dirname,'files', 'archive.gz');
+const pathToDestination = path.resolve(__dirname, 'files', 'fileToCompress.txt');
 
 // 1. async
 // const decompress = () => {

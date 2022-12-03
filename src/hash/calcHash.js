@@ -2,12 +2,16 @@
 // for file fileToCalculateHashFor.txt and return it as hex
 
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { stdout } from 'process';
 const {
     createHash
   } = await import('node:crypto');
 
-const filePath = './files/fileToCalculateHashFor.txt';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const filePath = path.resolve(__dirname, 'files', 'fileToCalculateHashFor.txt');
 
 // 1. with streams
 const calculateHash = async () => {

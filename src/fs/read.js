@@ -4,9 +4,14 @@
 
 import fs from 'fs';
 import fsPromises from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const errorMessage = 'FS operation failed';
-const filePath = './files/fileToRead.txt';
+const filePath = path.resolve(__dirname, 'files', 'fileToRead.txt');
 
 // 1. async
 // const read = () => {
