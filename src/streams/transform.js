@@ -18,4 +18,4 @@ const transform = async () => {
     stdin.pipe(transformStream).pipe(stdout);
 };
 
-transform();
+await transform();

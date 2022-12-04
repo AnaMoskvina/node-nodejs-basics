@@ -23,9 +23,7 @@ const pathToDestination = path.resolve(__dirname, 'files', 'fileToCompress.txt')
 //     pipeline(source, unzip, destination, err => {
 //         if (err) process.exitCode = 1;
 //     })
-// }
-
-// decompress()
+// };
 
 // 2. promises
 const decompress = async () => {
@@ -40,4 +38,4 @@ const decompress = async () => {
     }
 }
 
-decompress();
+await decompress();
