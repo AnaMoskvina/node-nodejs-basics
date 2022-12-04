@@ -23,8 +23,11 @@ const performCalculations = async () => {
     for (let i = 0; i < TREAD_COUNT; i++) {
         workerPromises.push(createWorker(INIT_NUMBER + i));
     }
-    const results = await Promise.all(workerPromises);
-    console.log(results);
+    const results = await Promise.allSettled(workerPromises);
+    console.log(results.map(promise => promise.status === 'fulfilled' 
+        ? promise.value 
+        : promise.reason)
+    );
 };
 
 await performCalculations();

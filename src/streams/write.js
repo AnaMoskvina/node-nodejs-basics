@@ -22,8 +22,8 @@ const outputFilePath = path.resolve(__dirname,'files', 'fileToWrite.txt');
 
 const write = async () => {
     try {
-        const fd = await open(inputFilePath);
-        fd.createReadStream().pipe(fs.createWriteStream(outputFilePath));
+        fs.createReadStream(inputFilePath)
+        .pipe(fs.createWriteStream(outputFilePath));
     } catch(err) {
         console.log(err);
     }
