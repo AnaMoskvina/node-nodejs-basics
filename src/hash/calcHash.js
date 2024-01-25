@@ -1,5 +1,5 @@
-// implement function that calculates SHA256 hash 
-// for file fileToCalculateHashFor.txt and return it as hex
+// implement function that calculates SHA256 hash for file fileToCalculateHashFor.txt 
+// and and logs it into console as hex using Streams API
 
 import fs from 'fs';
 import path from 'path';

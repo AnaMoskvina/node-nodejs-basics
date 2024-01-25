@@ -3,7 +3,8 @@
 // as before compression using zlib and Streams API
 
 import { createUnzip } from 'zlib';
-import { pipeline } from 'stream';
+// import { pipeline } from 'stream';
+import { pipeline } from 'stream/promises';
 import { createReadStream, createWriteStream } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -25,14 +26,26 @@ const pathToDestination = path.resolve(__dirname, 'files', 'fileToCompress.txt')
 //     })
 // };
 
-// 2. promises
+// 2. promises with promisify - old
+// const decompress = async () => {
+//     try {
+//         const unzip = createUnzip();
+//         const pipe = promisify(pipeline);
+//         const source = createReadStream(pathToArchive);
+//         const destination = createWriteStream(pathToDestination);
+//         await pipe(source, unzip, destination);
+//     } catch(err) {
+//         process.exitCode = 1;
+//     }
+// }
+
+// 3. promises
 const decompress = async () => {
     try {
         const unzip = createUnzip();
-        const pipe = promisify(pipeline);
         const source = createReadStream(pathToArchive);
         const destination = createWriteStream(pathToDestination);
-        await pipe(source, unzip, destination);
+        await pipeline(source, unzip, destination);
     } catch(err) {
         process.exitCode = 1;
     }

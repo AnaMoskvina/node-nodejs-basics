@@ -2,7 +2,8 @@
 // to archive.gz using zlib and Streams API
 
 import { createGzip } from 'zlib';
-import { pipeline } from 'stream';
+// import { pipeline } from 'stream';
+import { pipeline } from 'stream/promises';
 import { createReadStream, createWriteStream } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -25,14 +26,26 @@ const pathToDestination = path.resolve(__dirname, 'files', 'archive.gz');
 //     });
 // };
 
-// 2. promisees
+// 2. promisees - with promisify - old
+// const compress = async () => {
+//     try {
+//         const gzip = createGzip();
+//         const pipe = promisify(pipeline);
+//         const source = createReadStream(pathToSource);
+//         const destination = createWriteStream(pathToDestination);
+//         await pipe(source, gzip, destination);
+//     } catch (err) {
+//         process.exitCode = 1;
+//     }
+// };
+
+// 3. promises
 const compress = async () => {
     try {
         const gzip = createGzip();
-        const pipe = promisify(pipeline);
         const source = createReadStream(pathToSource);
         const destination = createWriteStream(pathToDestination);
-        await pipe(source, gzip, destination);
+        await pipeline(source, gzip, destination);
     } catch (err) {
         process.exitCode = 1;
     }
